@@ -6,17 +6,20 @@ package Problemas.ProductorConsumidor;
  */
 public class Consumidor extends Thread {
 
-    private Buffer bufon = new Buffer();
-
-    public Consumidor(Buffer bufon) {
+    private Buffer bufon;
+    private int cantidad;
+    private String nombre;
+    public Consumidor(Buffer bufon,int cantidad,String nombre) {
         this.bufon = bufon;
+        this.cantidad=cantidad;
+        this.nombre= nombre;
     }
 
     public void run() {
         while (true) {
             try {
-                if (bufon.puedeSacar(3)) {
-                    bufon.sacar(3);
+                if (bufon.puedeSacar(cantidad)) {
+                    bufon.sacar(cantidad,nombre);
                 }
             } catch (Exception ex) {
             }
