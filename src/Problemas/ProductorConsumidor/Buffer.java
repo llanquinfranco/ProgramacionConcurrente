@@ -28,8 +28,8 @@ public class Buffer {
 
     public void agregar(int num, String nombre) throws InterruptedException {
         vacios.acquire(num);
-        System.out.println("El productor " + nombre + " agrego " + num + " productos en la cinta");
         mutex.acquire();
+        System.out.println("El productor " + nombre + " agrego " + num + " productos en la cinta");
         cantidadUsados = cantidadUsados + num;
         System.out.println("Ahora hay " + this.cantidadUsados + " cosas en la cinta");
         mutex.release();
@@ -42,8 +42,8 @@ public class Buffer {
 
     public void sacar(int num, String nombre) throws InterruptedException {
         llenos.acquire(num);
-        System.out.println("El consumidor " + nombre + " saco " + num + " productos de la cinta");
         mutex.acquire();
+        System.out.println("El consumidor " + nombre + " saco " + num + " productos de la cinta");
         cantidadUsados = cantidadUsados - num;
         System.out.println("Ahora hay " + this.cantidadUsados + " cosas en la cinta");
         mutex.release();
