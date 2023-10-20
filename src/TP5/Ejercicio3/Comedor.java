@@ -42,12 +42,19 @@ public class Comedor {
         cantPerros--;
         mutex.release();
         if (usados == capacidad) {
-            semGatos.release(capacidad);
-            usados = 0;
+            // Si comieron la misma cantidad de perros que la cantidad de platos
+            if (cantPerros > 0 && cantGatos == 0) {
+                // Si no quedan gatos, siguen comiendo los perros (bucle)
+                semPerros.release(capacidad);
+                usados = 0;
+            } else {
+                // Si todavia quedan gatos, ahora comen los gatos
+                semGatos.release(capacidad);
+                usados = 0;
+            }
         } else if (cantPerros == 0 && cantGatos > 0) {
-            /* Si ya comieron todos los perros y quedan gatos, le doy a los 
-            gatos todos los permisos */
-            semGatos.release(cantGatos);
+            // Si no quedan mas perros, ahora comen los gatos restantes (controlando la cantidad de platos)
+            semGatos.release(capacidad);
             usados = 0;
         }
 
@@ -62,12 +69,19 @@ public class Comedor {
         cantGatos--;
         mutex.release();
         if (usados == capacidad) {
-            semPerros.release(capacidad);
-            usados = 0;
+            // Si comieron la misma cantidad de gatos que la cantidad de platos
+            if (cantGatos > 0 && cantPerros == 0) {
+                // Si no quedan perros, siguen comiendo los gatos (bucle)
+                semGatos.release(capacidad);
+                usados = 0;
+            } else {
+                // Si todavia quedan perros, ahora comen los perros
+                semPerros.release(capacidad);
+                usados = 0;
+            }
         } else if (cantGatos == 0 && cantPerros > 0) {
-            /* Si ya comieron todos los gatos y quedan perros, le doy a los
-            perros todos los permisos */
-            semPerros.release(cantPerros);
+            // Si no quedan mas gatos, ahora comen los perros restantes (controlando la cantidad de platos)
+            semPerros.release(capacidad);
             usados = 0;
         }
     }
