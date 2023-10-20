@@ -7,34 +7,20 @@ import java.util.concurrent.Semaphore;
  * @author Fran
  */
 public class Piscina {
-    
-    private int limite;
+
     private Semaphore semDisponible;
-    private Semaphore semSalida;
-    
+
     public Piscina(int limite) {
-        this.limite = limite;
         this.semDisponible = new Semaphore(limite);
-        this.semSalida = new Semaphore(0);
     }
-    
-    
-    
-    public void solicitarAcceso() {
-        
+
+    public void dejarEntrar(int numero) throws InterruptedException {
+        semDisponible.acquire();
+        System.out.println("La persona " + numero + " entro y se esta bañando");
+        Thread.sleep(500);
+        System.out.println("La persona " + numero + " salio de la pile");
+        semDisponible.release();
+
     }
-    
-    public void salirPiscina() {
-        
-    }
-    
-    public void dejarEntrar() {
-        
-    }
-    
-    public void liberarLugar() {
-        
-    }
-    
-    
+
 }

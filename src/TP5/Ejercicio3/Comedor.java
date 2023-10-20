@@ -34,11 +34,15 @@ public class Comedor {
 
     public void comerPerro(int numero) throws InterruptedException {
         semPerros.acquire();
-        mutex.acquire();
+        
         System.out.println("El perro " + numero + " esta comiendo");
         Thread.sleep(100);
+        
+        mutex.acquire();
         usados++;
         cantPerros--;
+        mutex.release();
+        
         System.out.println("Van comiendo " + usados + " perros");
         System.out.println("");
         if (usados == capacidad) {
@@ -48,17 +52,21 @@ public class Comedor {
             semGatos.release(cantGatos);
             usados = 0;
         }
-        mutex.release();
+        
 
     }
 
     public void comerGato(int numero) throws InterruptedException {
         semGatos.acquire();
-        mutex.acquire();
+        
         System.out.println("El gato " + numero + " esta comiendo");
         Thread.sleep(100);
+        
+        mutex.acquire();
         usados++;
         cantGatos--;
+        mutex.release();
+        
         System.out.println("Van comiendo " + usados + " gatos");
         System.out.println("");
         if (usados == capacidad) {
@@ -68,7 +76,7 @@ public class Comedor {
             semPerros.release(cantPerros);
             usados = 0;
         }
-        mutex.release();
+        
 
     }
 

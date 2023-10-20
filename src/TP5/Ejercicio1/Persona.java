@@ -4,24 +4,22 @@ package TP5.Ejercicio1;
  *
  * @author Fran
  */
-public class Persona extends Thread{
-    
+public class Persona extends Thread {
+
     private int numero;
-    private Piscina piscina;
-    
-    public Persona(int numero, Piscina piscina) {
+    private GestorPiscina gestor;
+
+    public Persona(int numero, GestorPiscina gestor) {
         this.numero = numero;
-        this.piscina = piscina;
+        this.gestor = gestor;
     }
-    
-    
+
     public void run() {
-        
-        piscina.solicitarAcceso();
-        
-        
-        piscina.salirPiscina();
-        
-        
+        try {
+            gestor.nadar(numero);
+        } catch (Exception ex) {
+
+        }
     }
+
 }
