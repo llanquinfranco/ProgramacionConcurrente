@@ -21,6 +21,7 @@ public class Comedor {
         this.capacidad = capacidad;
         this.usados = 0;
         this.mutex = new Semaphore(1);
+        // Para elegir empezar con perros o con gatos. Cambiar
         if (especie == 'P') {
             semPerros = new Semaphore(capacidad);
             semGatos = new Semaphore(0);
@@ -34,50 +35,41 @@ public class Comedor {
 
     public void comerPerro(int numero) throws InterruptedException {
         semPerros.acquire();
-        
         System.out.println("El perro " + numero + " esta comiendo");
-        Thread.sleep(100);
-        
+        Thread.sleep(500);
         mutex.acquire();
         usados++;
         cantPerros--;
         mutex.release();
-        
-        System.out.println("Van comiendo " + usados + " perros");
-        System.out.println("");
         if (usados == capacidad) {
             semGatos.release(capacidad);
             usados = 0;
         } else if (cantPerros == 0 && cantGatos > 0) {
+            /* Si ya comieron todos los perros y quedan gatos, le doy a los 
+            gatos todos los permisos */
             semGatos.release(cantGatos);
             usados = 0;
         }
-        
 
     }
 
     public void comerGato(int numero) throws InterruptedException {
         semGatos.acquire();
-        
         System.out.println("El gato " + numero + " esta comiendo");
-        Thread.sleep(100);
-        
+        Thread.sleep(500);
         mutex.acquire();
         usados++;
         cantGatos--;
         mutex.release();
-        
-        System.out.println("Van comiendo " + usados + " gatos");
-        System.out.println("");
         if (usados == capacidad) {
             semPerros.release(capacidad);
             usados = 0;
         } else if (cantGatos == 0 && cantPerros > 0) {
+            /* Si ya comieron todos los gatos y quedan perros, le doy a los
+            perros todos los permisos */
             semPerros.release(cantPerros);
             usados = 0;
         }
-        
-
     }
 
 }

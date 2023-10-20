@@ -7,7 +7,7 @@ package TP5.Ejercicio3;
 public class Main {
 
     public static void main(String[] args) {
-        int i, cantPerros = 20, cantGatos = 7; 
+        int i, cantPerros = 20, cantGatos = 17; 
         
         Comedor comedor = new Comedor(5, 'P', cantPerros, cantGatos);
         
