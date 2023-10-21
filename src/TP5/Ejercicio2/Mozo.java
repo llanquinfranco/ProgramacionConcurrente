@@ -16,11 +16,6 @@ public class Mozo extends Thread {
         while (true) {
             try {
                 confiteria.prepararBebida();
-                
-                
-                
-                
-                confiteria.servirBebida();
             } catch (Exception ex) {
             }
         }

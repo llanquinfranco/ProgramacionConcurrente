@@ -16,9 +16,6 @@ public class Cocinero extends Thread {
         while (true) {
             try {
                 confiteria.prepararComida();
-                
-                
-                confiteria.servirComida();
             } catch (Exception ex) {
 
             }

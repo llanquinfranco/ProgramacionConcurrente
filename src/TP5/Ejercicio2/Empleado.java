@@ -18,19 +18,24 @@ public class Empleado extends Thread {
 
     public void run() {
         try {
-            confiteria.ocuparEspacio();
+            confiteria.ocuparEspacio(numero);
             switch (tipo) {
                 case 1:
-                    confiteria.tomar(tipo);
+                    confiteria.pedirBebida(numero);
+                    confiteria.tomar(numero);
                     break;
                 case 2:
-                    confiteria.comer();
+                    confiteria.pedirComida(numero);
+                    confiteria.comer(numero);
                     break;
                 case 3:
-                    confiteria.tomarYComer();
+                    confiteria.pedirBebida(numero);
+                    confiteria.tomar(numero);
+                    confiteria.pedirComida(numero);
+                    confiteria.comer(numero);
                     break;
             }
-            confiteria.desocuparEspacio();
+            confiteria.desocuparEspacio(numero);
         } catch (Exception ex) {
         }
     }
