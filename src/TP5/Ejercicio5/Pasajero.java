@@ -16,9 +16,9 @@ public class Pasajero extends Thread {
 
     public void run() {
         try {
-            tren.comprarTicket(this.numero);
-            tren.subirAlTren(this.numero);
-            tren.bajarseDelTren(this.numero);
+            tren.comprarTicket(numero);
+            tren.entrar(numero);
+            tren.bajar(numero);
         } catch (Exception ex) {
 
         }
