@@ -59,7 +59,7 @@ public class Pista {
                 semDespegue.release();
             }
         } else if (turno == 'D') {
-            // Si es el turno que aterricen
+            // Si es el turno que despeguen
             if (despego) {
                 // Si ya despego uno
                 if (cantDespegues > 0 && cantAterrizajes == 0) {
