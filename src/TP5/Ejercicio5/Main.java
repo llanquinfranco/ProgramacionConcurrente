@@ -20,7 +20,6 @@ public class Main {
             pasajeros[i] = new Pasajero(i + 1, tren);
             pasajeros[i].start();
         }
-        
     }
     
 }

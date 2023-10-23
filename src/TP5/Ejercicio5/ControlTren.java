@@ -17,7 +17,6 @@ public class ControlTren extends Thread {
             try {
                 tren.iniciarRecorrido();
             } catch (Exception ex) {
-
             }
         }
     }

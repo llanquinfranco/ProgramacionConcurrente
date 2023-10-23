@@ -17,7 +17,6 @@ public class VendedorTickets extends Thread {
             try {
                 tren.venderTicket();
             } catch (Exception ex) {
-
             }
         }
     }

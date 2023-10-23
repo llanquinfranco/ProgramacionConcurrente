@@ -20,7 +20,6 @@ public class Pasajero extends Thread {
             tren.entrar(numero);
             tren.bajar(numero);
         } catch (Exception ex) {
-
         }
     }
 
