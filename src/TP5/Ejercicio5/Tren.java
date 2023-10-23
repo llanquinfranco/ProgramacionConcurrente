@@ -49,9 +49,9 @@ public class Tren {
     
     public void iniciarRecorrido() throws InterruptedException {
         semViaje.acquire(espacio);
-        System.out.println("El Tren Turistico inicio el Recorrido -----------------------------------");
+        System.out.println("--------------- El Tren Turistico inicio el Recorrido ---------------");
         Thread.sleep(1000);
-        System.out.println("El Tren Turistico finalizo el Recorrido ---------------------------------");
+        System.out.println("--------------- El Tren Turistico finalizo el Recorrido ---------------");
         semSalida.release(espacio);
     }
     
