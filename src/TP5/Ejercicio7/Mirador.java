@@ -9,34 +9,32 @@ import java.util.concurrent.Semaphore;
 public class Mirador {
     
     private Semaphore escalones;
-    private Semaphore tobogan1;
-    private Semaphore tobogan2;
+    private Semaphore toboganes;
     private Semaphore semBajada;
     
     public Mirador(int capacidad) {
         this.escalones = new Semaphore(capacidad);
-        this.tobogan1 = new Semaphore(1);
-        this.tobogan2 = new Semaphore(1);
+        this.toboganes = new Semaphore(2);
         this.semBajada = new Semaphore(0);
     }
     
-    public void subirAlMirador() {
+    public void subirAlMirador(int numero) throws InterruptedException {
+        escalones.acquire();
+        
+        
+    }
+    
+    public void hacerBajar() {
         
         
         
     }
     
-    public void controlar() {
-        
-        
-        
-    }
-    
-    public void bajarPorTobogan() throws InterruptedException {
+    public void bajarPorTobogan(int numero) throws InterruptedException {
         semBajada.acquire();
         
         
         
-        
+        escalones.release();
     }
 }

@@ -16,8 +16,8 @@ public class Visitante extends Thread {
 
     public void run() {
         try {
-            mirador.subirAlMirador();
-            mirador.bajarPorTobogan();
+            mirador.subirAlMirador(numero);
+            mirador.bajarPorTobogan(numero);
         } catch (Exception ex) {
 
         }

@@ -15,7 +15,7 @@ public class Encargado extends Thread {
     public void run() {
         try {
             while (true) {
-                mirador.controlar();
+                mirador.hacerBajar();
             }
         } catch (Exception ex) {
 
