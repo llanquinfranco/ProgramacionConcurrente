@@ -1,4 +1,4 @@
-package TP6.Ejercicio4;
+package TP6.Ejercicio5;
 
 /**
  *
@@ -6,16 +6,18 @@ package TP6.Ejercicio4;
  */
 public class Consumidor implements Runnable {
 
+    private int numero;
     private Buffer buffer;
 
-    public Consumidor(Buffer buffer) {
+    public Consumidor(int numero, Buffer buffer) {
+        this.numero = numero;
         this.buffer = buffer;
     }
 
     public void run() {
         while (true) {
             try {
-                buffer.consumir();
+                buffer.consumir(numero);
             } catch (Exception ex) {
 
             }

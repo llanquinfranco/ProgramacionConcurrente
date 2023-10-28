@@ -1,4 +1,4 @@
-package TP6.Ejercicio4;
+package TP6.Ejercicio5;
 
 /**
  *
@@ -14,23 +14,25 @@ public class Buffer {
         this.cantUsados = 0;
     }
 
-    public synchronized void producir() throws InterruptedException {
+    public synchronized void producir(int numero) throws InterruptedException {
         // Mientras este lleno, el productor espera
         while (cantUsados == capacidad) {
             this.wait();
         }
         cantUsados++;
-        System.out.println("El productor coloco un producto en el almacen, ahora hay " + cantUsados);
+        Thread.sleep(500);
+        System.out.println("El productor " + numero + " coloco un producto en el almacen, ahora hay " + cantUsados);
         this.notifyAll();
     }
 
-    public synchronized void consumir() throws InterruptedException {
+    public synchronized void consumir(int numero) throws InterruptedException {
         // Mientras este vacio, el consumidor espera
         while (cantUsados == 0) {
             this.wait();
         }
         cantUsados--;
-        System.out.println("El consumidor retiro un producto del almacen, ahora hay " + cantUsados);
+        Thread.sleep(500);
+        System.out.println("El consumidor " + numero + " retiro un producto del almacen, ahora hay " + cantUsados);
         this.notifyAll();
     }
 

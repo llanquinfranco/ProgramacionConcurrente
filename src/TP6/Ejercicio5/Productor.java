@@ -1,25 +1,27 @@
-package TP6.Ejercicio4;
+package TP6.Ejercicio5;
 
 /**
  *
  * @author Fran
  */
-public class Consumidor implements Runnable {
-
+public class Productor implements Runnable {
+    
+    private int numero;
     private Buffer buffer;
 
-    public Consumidor(Buffer buffer) {
+    public Productor(int numero, Buffer buffer) {
+        this.numero = numero;
         this.buffer = buffer;
     }
 
     public void run() {
         while (true) {
             try {
-                buffer.consumir();
+                buffer.producir(numero);
             } catch (Exception ex) {
 
             }
         }
-    }
 
+    }
 }
