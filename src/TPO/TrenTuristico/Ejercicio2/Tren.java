@@ -1,4 +1,4 @@
-package TPO.Ejercicio2;
+package TPO.TrenTuristico.Ejercicio2;
 
 import java.util.concurrent.Semaphore;
 

@@ -1,4 +1,4 @@
-package TPOPedco.Ejercicio1;
+package TPO.Pedco.Ejercicio1;
 
 /**
  *
