@@ -8,7 +8,6 @@ import java.util.Random;
  */
 public class Estudiante extends Thread {
     
-    private String nombre;
     private Sala sala;
     
     public Estudiante(String nombre, Sala sala) {
