@@ -17,10 +17,8 @@ public class Automovil extends Thread {
 
     public void run() {
         try {
-            
-            
-            
-            
+            ferry.subirAutomovil(capacidad);
+            ferry.bajarAutomovil(capacidad);
         } catch (Exception ex) {
 
         }
