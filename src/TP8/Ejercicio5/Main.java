@@ -12,7 +12,7 @@ public class Main {
         Cocinero cocinero = new Cocinero(olla);
         cocinero.start();
 
-        for (int i = 1; i < 50; i++) {
+        for (int i = 1; i < 51; i++) {
             Canibal canibal = new Canibal("Canibal " + i, olla);
             canibal.start();
         }
