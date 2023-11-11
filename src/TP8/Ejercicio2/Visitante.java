@@ -19,11 +19,11 @@ public class Visitante extends Thread{
         try {
             if(!esDiscapacitado) {
                 observatorio.entrarPersona();
-                Thread.sleep(4000);
+                Thread.sleep(400);
                 observatorio.salirPersona();
             } else {
                 observatorio.entrarDiscapacitado();
-                Thread.sleep(4000);
+                Thread.sleep(400);
                 observatorio.salirDiscapacitado();
             }
         }catch(Exception ex) {

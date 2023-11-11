@@ -16,7 +16,7 @@ public class Mantenimiento extends Thread {
     public void run() {
         try {
             observatorio.entrarMantenimiento();
-            Thread.sleep(3000);
+            //Thread.sleep(3000);
             observatorio.salirMantenimiento();
         } catch (Exception ex) {
 

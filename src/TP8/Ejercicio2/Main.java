@@ -11,7 +11,7 @@ public class Main {
         Observatorio observatorio = new Observatorio();
 
         for (int i = 1; i < 100; i++) {
-            if (i % 9 == 0) {
+            if (i % 9 == 0) {   // Cada 9 visitantes, hay un discapacitado
                 Visitante visitante = new Visitante("Visitante " + i, true, observatorio);
                 visitante.start();
             } else {
@@ -20,12 +20,12 @@ public class Main {
             }
         }
 
-        for (int j = 0; j < 20; j++) {
+        for (int j = 1; j < 20; j++) {
             Mantenimiento mantenimiento = new Mantenimiento("Persona de Mantenimiento " + j, observatorio);
             mantenimiento.start();
         }
 
-        for (int k = 0; k < 10; k++) {
+        for (int k = 1; k < 10; k++) {
             Investigador investigador = new Investigador("Investigador " + k, observatorio);
             investigador.start();
         }

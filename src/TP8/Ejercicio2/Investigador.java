@@ -16,7 +16,7 @@ public class Investigador extends Thread {
     public void run() {
         try {
             observatorio.entrarInvestigador();
-            Thread.sleep(5000);
+            //Thread.sleep(5000);
             observatorio.salirInvestigador();
         } catch (Exception ex) {
 
