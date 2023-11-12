@@ -27,7 +27,7 @@ public class Mostrador {
             accesoMostrador.lock();
             colaPasteles.add(peso);
             System.out.println("El Horno " + tipo + " horneo un pastel de " + peso + " kilos");
-            empaquetadores.signal();    // Notifica al empaquetador que ya hay un pastel ¿?
+            empaquetadores.signal();    // Notifica al empaquetador que ya hay un pastel
         } finally {
             accesoMostrador.unlock();
         }
@@ -39,11 +39,11 @@ public class Mostrador {
         int pesoPastel;
         try {
             accesoMostrador.lock();
-            while (colaPasteles.isEmpty()) {
+            while (colaPasteles.isEmpty()) {    // Si no hay pasteles en la cinta, que espere
                 empaquetadores.await();
             }
-            pesoPastel = colaPasteles.peek();
-            colaPasteles.poll();
+            pesoPastel = colaPasteles.peek();   
+            colaPasteles.poll();    // remove tmb ¿?
             System.out.println("El " + Thread.currentThread().getName() + " agarro un pastel de " + pesoPastel + " kilos");
         } finally {
             accesoMostrador.unlock();
