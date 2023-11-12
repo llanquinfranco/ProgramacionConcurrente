@@ -6,11 +6,17 @@ package Parciales.BuqueDeAutos;
  */
 public class Main {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
-        // TODO code application logic here
+        Buque buque = new Buque();
+        
+        ControlBuque control = new ControlBuque(buque);
+        control.start();
+        
+        // Considero que siempre se llena como el Tren Turistico?
+        for(int i = 1; i < 61; i++) {
+            Auto auto = new Auto("Auto " + i, buque);
+            auto.start();
+        }
     }
     
 }
