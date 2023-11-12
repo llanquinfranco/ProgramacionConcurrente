@@ -6,11 +6,18 @@ package Parciales.ParqueConcurrido;
  */
 public class Main {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
-        // TODO code application logic here
+        Parque parque = new Parque(10);
+
+        for (int i = 1; i < 48; i++) {
+            if (i % 4 == 0) {
+                Persona persona = new Persona("Visitante " + i + " (Residente)", true, parque);
+                persona.start();
+            } else {
+                Persona persona = new Persona("Visitante " + i + " (Comun)", false, parque);
+                persona.start();
+            }
+        }
     }
-    
+
 }
