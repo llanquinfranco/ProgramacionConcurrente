@@ -19,7 +19,7 @@ public class Insertor extends Thread {
     public void run() {
         while (true) {
             try {
-                buffer.insertar();
+                buffer.insertar("Dato del " + Thread.currentThread().getName());
                 Thread.sleep(random.nextInt(1000, 2000));
             } catch (Exception ex) {
 
