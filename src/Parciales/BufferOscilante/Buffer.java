@@ -29,34 +29,31 @@ public class Buffer {
     public void insertar(Object elem) throws InterruptedException {
         semInsertar.acquire();
         if(colaExtraer == 1) {
-            System.out.println(Thread.currentThread().getName() + " inserto " + cola2.peek() + " en la cinta 2");
             cola2.add(elem);
+            System.out.println(Thread.currentThread().getName() + " inserto " + elem + " en la cinta 2");
         } else {
-            System.out.println(Thread.currentThread().getName() + " inserto " + cola2.peek() + " en la cinta 1");
             cola1.add(elem);
+            System.out.println(Thread.currentThread().getName() + " inserto " + elem + " en la cinta 1");
         }
         semInsertar.release();
     }
     
     public void extraer() throws InterruptedException {
+        // Le hago poll en el sout para eliminar el frente de la cola y mostrar su contenido
         semExtraer.acquire();
         if(colaExtraer == 1) {
             if(cola1.isEmpty()) {
                 oscilar();
-                cola2.poll();
-                System.out.println(Thread.currentThread().getName() + " extrajo " + cola2.peek() + " de la cinta " + colaExtraer);
+                System.out.println(Thread.currentThread().getName() + " extrajo " + cola2.poll() + " de la cinta " + colaExtraer);
             } else {
-                cola1.poll();
-                System.out.println(Thread.currentThread().getName() + " extrajo " + cola1.peek() + " de la cinta " + colaExtraer);
+                System.out.println(Thread.currentThread().getName() + " extrajo " + cola1.poll() + " de la cinta " + colaExtraer);
             }
         } else {
             if(cola2.isEmpty()) {
                 oscilar();
-                cola1.poll();
-                System.out.println(Thread.currentThread().getName() + " extrajo " + cola1.peek() + " de la cinta " + colaExtraer);
+                System.out.println(Thread.currentThread().getName() + " extrajo " + cola1.poll() + " de la cinta " + colaExtraer);
             } else {
-                cola2.poll();
-                System.out.println(Thread.currentThread().getName() + " extrajo " + cola2.peek() + " de la cinta " + colaExtraer);
+                System.out.println(Thread.currentThread().getName() + " extrajo " + cola2.poll() + " de la cinta " + colaExtraer);
             }
         }
         semExtraer.release();
