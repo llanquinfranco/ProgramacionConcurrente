@@ -57,7 +57,6 @@ public class Recipiente {
             System.out.println("El contenido del recipiente fue envasado para su produccion");
             System.out.println("Ahora esta vacio");
         }
-        
         mutex.release();
     }
     
