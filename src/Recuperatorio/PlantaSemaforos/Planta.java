@@ -15,7 +15,7 @@ public class Planta {
     private Semaphore semVino;
     private Semaphore semEmpaquetador;
     private Semaphore semTransportador;
-    private Semaphore mutex;
+    private Semaphore mutex;    // No se si es necesario
 
     public Planta() {
         this.cajaAgua = 0;
