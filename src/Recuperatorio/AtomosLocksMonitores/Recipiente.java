@@ -14,6 +14,10 @@ public class Recipiente {
     private int ocupacion;
     private int oxigenos;
     private int hidrogenos;
+    private Lock accesoRecipiente;
+    private Condition esperaHidrogeno;
+    private Condition esperaOxigeno;
+    
     
     public Recipiente(int capacidad) {
         this.capacidad = capacidad;
@@ -22,5 +26,29 @@ public class Recipiente {
         this.hidrogenos = 0;
     }
     
+    public synchronized void Olisto() {
+        System.out.println("El " + Thread.currentThread().getName() + " esta listo");
+        oxigenos++;
+        if(hidrogenos >= 2 && oxigenos >= 1) {
+            this.hacerAgua();
+        }
+    }
     
+    
+    public synchronized void Hlisto() {
+        System.out.println("El " + Thread.currentThread().getName() + " esta listo");
+        hidrogenos++;
+        if(hidrogenos >= 2 && oxigenos >= 1) {
+            this.hacerAgua();
+        }
+        
+        
+    }
+    
+    private synchronized void hacerAgua() {
+        
+        
+        
+        
+    }
 }
