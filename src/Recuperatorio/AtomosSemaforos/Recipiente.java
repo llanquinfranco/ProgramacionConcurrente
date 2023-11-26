@@ -9,6 +9,7 @@ import java.util.concurrent.Semaphore;
 public class Recipiente {
     
     private Semaphore mutex;
+    private Semaphore agua;
     private int capacidad;
     private int ocupacion;
     private int oxigenos;
@@ -16,6 +17,7 @@ public class Recipiente {
     
     public Recipiente(int capacidad) {
         this.mutex = new Semaphore(1);
+        this.agua = new Semaphore(0);
         this.capacidad = capacidad;
         this.ocupacion = 0;
         this.oxigenos = 0;
@@ -38,11 +40,12 @@ public class Recipiente {
         hidrogenos++;
         mutex.release();
         if(hidrogenos >= 2 && oxigenos >= 1) {
-            this.hacerAgua();
+            agua.release();
         }
     }
     
-    private void hacerAgua() throws InterruptedException {
+    public void hacerAgua() throws InterruptedException {
+        agua.acquire();
         mutex.acquire();
         System.out.println("Se encontraron 2 Hidrogenos y 1 Oxigeno");
         System.out.println("Formando molecula de Agua...");

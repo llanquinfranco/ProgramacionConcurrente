@@ -26,29 +26,39 @@ public class Recipiente {
         this.hidrogenos = 0;
     }
     
-    public synchronized void Olisto() {
-        System.out.println("El " + Thread.currentThread().getName() + " esta listo");
+    public synchronized void Olisto() throws InterruptedException {
         oxigenos++;
-        if(hidrogenos >= 2 && oxigenos >= 1) {
-            this.hacerAgua();
-        }
-    }
-    
-    
-    public synchronized void Hlisto() {
         System.out.println("El " + Thread.currentThread().getName() + " esta listo");
-        hidrogenos++;
         if(hidrogenos >= 2 && oxigenos >= 1) {
-            this.hacerAgua();
+            this.notifyAll();
         }
-        
-        
     }
     
-    private synchronized void hacerAgua() {
-        
-        
-        
-        
+    
+    public synchronized void Hlisto() throws InterruptedException {
+        hidrogenos++;
+        System.out.println("El " + Thread.currentThread().getName() + " esta listo");
+        if(hidrogenos >= 2 && oxigenos >= 1) {
+            this.notifyAll();
+        }
+    }
+    
+    public synchronized void hacerAgua() throws InterruptedException {
+        while(hidrogenos < 2 && oxigenos < 1) {
+            this.wait();
+        }
+        System.out.println("Se encontraron 2 Hidrogenos y 1 Oxigeno");
+        System.out.println("Formando molecula de Agua...");
+        Thread.sleep(1000);
+        hidrogenos = hidrogenos - 2;
+        oxigenos--;
+        ocupacion++;
+        System.out.println("Se deposito 1 molecula de Agua en el recipiente");
+        System.out.println("Recipiente: " + ocupacion + "/" + capacidad);
+        if(ocupacion == capacidad) {
+            ocupacion = 0;
+            System.out.println("El contenido del recipiente fue envasado para su produccion");
+            System.out.println("Ahora esta vacio");
+        }
     }
 }
