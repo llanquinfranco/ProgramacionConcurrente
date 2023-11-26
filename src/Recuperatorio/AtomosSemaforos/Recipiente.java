@@ -30,7 +30,7 @@ public class Recipiente {
         oxigenos++;
         mutex.release();
         if(hidrogenos >= 2 && oxigenos >= 1) {
-            this.hacerAgua();
+            agua.release();
         }
     }
     
