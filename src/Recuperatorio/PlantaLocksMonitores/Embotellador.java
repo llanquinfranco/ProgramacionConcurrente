@@ -22,10 +22,10 @@ public class Embotellador extends Thread {
         while (true) {
             try {
                 if(tipo == 'A') {
-                    //Thread.sleep(random.nextInt(1000,2000));
+                    Thread.sleep(random.nextInt(1000,2000));
                     planta.prepararBotellaAgua();
                 } else if(tipo == 'V') {
-                    //Thread.sleep(random.nextInt(1000,2000));
+                    Thread.sleep(random.nextInt(1000,2000));
                     planta.prepararBotellaVino();
                 }
             } catch (Exception ex) {
