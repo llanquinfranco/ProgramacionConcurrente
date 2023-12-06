@@ -81,7 +81,8 @@ public class Compania {
             while (cantEspanol == 0) {
                 esperaEspanol.await();
             }
-            numero = r.nextInt(1, cantEspanol);
+            numero = r.nextInt((cantEspanol - 1) + 1) + 1;
+            //numero = r.nextInt(1, cantEspanol);
             System.out.println("El " + Thread.currentThread().getName() + " selecciono el capitulo " + numero + " en espanol");
         } finally {
             espanol.unlock();
@@ -100,7 +101,8 @@ public class Compania {
             while (cantIngles == 0) {
                 esperaIngles.await();
             }
-            numero = r.nextInt(1, cantIngles);
+            numero = r.nextInt((cantIngles - 1) + 1) + 1;
+            //numero = r.nextInt(1, cantIngles);
             System.out.println("El " + Thread.currentThread().getName() + " selecciono el capitulo " + numero + " en ingles");
         } finally {
             ingles.unlock();
