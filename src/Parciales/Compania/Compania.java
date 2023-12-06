@@ -9,41 +9,39 @@ import java.util.concurrent.locks.ReentrantLock;
 
 /**
  *
- * @author Fran
+ * @author franco.llanquin
  */
 public class Compania {
 
     Random r = new Random();
-    private Lock filmador = new ReentrantLock();
-    private Lock traductor = new ReentrantLock();
+    private int capitulosEspanol = 0;
+    private int capitulosIngles = 0;
+    private Queue<Object> colaTraduccion = new LinkedList<>();
     private Lock espanol = new ReentrantLock();
     private Lock ingles = new ReentrantLock();
-    private Condition esperaTraductor = traductor.newCondition();
+    private Lock traductor = new ReentrantLock();
+    private Lock filmador = new ReentrantLock();    // se utiliza mas que nada para mutex
     private Condition esperaEspanol = espanol.newCondition();
     private Condition esperaIngles = ingles.newCondition();
-    private int i = 0;
-    private Queue colaTraduccion = new LinkedList<>();
-    private int cantEspanol = 0;
-    private int cantIngles = 0;
+    private Condition esperaTraducir = traductor.newCondition();
+    private int i = 1;  //contador de capitulos que tiene la serie
 
     public void filmarCapitulo() {
         try {
             filmador.lock();
+            System.out.println("Se filmo el capitulo " + i + " de la serie");
+            colaTraduccion.add("Capitulo " + i + " de la serie");
             i++;
-            System.out.println("El filmador filmo el capitulo " + i + " de la serie");
-            cantEspanol++;
-            colaTraduccion.add(i);
-
+            capitulosEspanol++;
             try {
                 traductor.lock();
-                esperaTraductor.signal();
+                esperaTraducir.signalAll();
             } finally {
                 traductor.unlock();
             }
-
             try {
                 espanol.lock();
-                esperaEspanol.signal();
+                esperaEspanol.signalAll();
             } finally {
                 espanol.unlock();
             }
@@ -56,16 +54,15 @@ public class Compania {
         try {
             traductor.lock();
             while (colaTraduccion.isEmpty()) {
-                esperaTraductor.await();
+                esperaTraducir.await(); // si no hay caps a traducir, espera
             }
-            Object capitulo = colaTraduccion.peek();
-            System.out.println("El " + Thread.currentThread().getName() + " traducio el capitulo " + capitulo + " de la serie");
-            colaTraduccion.remove();
-            cantIngles++;
-            
+            System.out.println("El " + Thread.currentThread().getName() + " tradujo el "
+                    + colaTraduccion.peek() + " al ingles");
+            colaTraduccion.remove();    // ya lo traduci, lo elimino de la cola
+            capitulosIngles++;
             try {
                 ingles.lock();
-                esperaIngles.signal();
+                esperaIngles.signalAll();   // notifica que ya se traducio un capitulo
             } finally {
                 ingles.unlock();
             }
@@ -74,16 +71,17 @@ public class Compania {
         }
     }
 
-    public int verEspanol() throws InterruptedException {
+    public int seleccionarEspanol() throws InterruptedException {
         int numero;
         try {
             espanol.lock();
-            while (cantEspanol == 0) {
-                esperaEspanol.await();
+            while (capitulosEspanol == 0) {
+                esperaEspanol.await();  // si todavia no hay capitulos en espanol, espera
             }
-            numero = r.nextInt((cantEspanol - 1) + 1) + 1;
-            //numero = r.nextInt(1, cantEspanol);
-            System.out.println("El " + Thread.currentThread().getName() + " selecciono el capitulo " + numero + " en espanol");
+            //numero = r.nextInt(capitulosEspanol);
+            numero = r.nextInt((capitulosEspanol - 1) + 1) + 1;
+            System.out.println("El " + Thread.currentThread().getName() + " selecciono el capitulo "
+                    + numero + " de la serie (en Espanol)");
         } finally {
             espanol.unlock();
         }
@@ -91,19 +89,21 @@ public class Compania {
     }
 
     public void terminarEspanol(int numero) {
-        System.out.println("El " + Thread.currentThread().getName() + " termino de ver el episodio " + numero + " en espanol");
+        System.out.println("El " + Thread.currentThread().getName() + " termino de ver el capitulo "
+                + numero + " de la serie (en Espanol)");
     }
 
-    public int verIngles() throws InterruptedException {
+    public int seleccionarIngles() throws InterruptedException {
         int numero;
         try {
             ingles.lock();
-            while (cantIngles == 0) {
-                esperaIngles.await();
+            while (capitulosIngles == 0) {
+                esperaIngles.await();   // si todavia no se traducio ningun capitulo, espera
             }
-            numero = r.nextInt((cantIngles - 1) + 1) + 1;
-            //numero = r.nextInt(1, cantIngles);
-            System.out.println("El " + Thread.currentThread().getName() + " selecciono el capitulo " + numero + " en ingles");
+            //numero = r.nextInt(capitulosIngles);
+            numero = r.nextInt((capitulosIngles - 1) + 1) + 1;
+            System.out.println("El " + Thread.currentThread().getName() + " selecciono el capitulo "
+                    + numero + " de la serie (en Ingles)");
         } finally {
             ingles.unlock();
         }
@@ -111,6 +111,8 @@ public class Compania {
     }
 
     public void terminarIngles(int numero) {
-        System.out.println("El " + Thread.currentThread().getName() + " termino de ver el episodio " + numero + " en ingles");
+        System.out.println("El " + Thread.currentThread().getName() + " termino de ver el capitulo "
+                + numero + " de la serie (en Ingles)");
     }
+
 }

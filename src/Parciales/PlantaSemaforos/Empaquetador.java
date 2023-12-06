@@ -1,4 +1,4 @@
-package Recuperatorio.PlantaLocksMonitores;
+package Parciales.PlantaSemaforos;
 
 import java.util.Random;
 

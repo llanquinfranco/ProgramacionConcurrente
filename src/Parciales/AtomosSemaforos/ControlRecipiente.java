@@ -1,4 +1,4 @@
-package Recuperatorio.AtomosSemaforos;
+package Parciales.AtomosSemaforos;
 
 /**
  *

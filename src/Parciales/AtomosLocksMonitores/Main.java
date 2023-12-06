@@ -1,4 +1,4 @@
-package Recuperatorio.AtomosSemaforos;
+package Parciales.AtomosLocksMonitores;
 
 /**
  *
@@ -7,7 +7,6 @@ package Recuperatorio.AtomosSemaforos;
 public class Main {
 
     public static void main(String[] args) {
-
         Recipiente recipiente = new Recipiente(10);
         
         ControlRecipiente control = new ControlRecipiente(recipiente);
@@ -15,7 +14,6 @@ public class Main {
         
         Generador generador = new Generador(recipiente);
         generador.start();
-
     }
-
+    
 }

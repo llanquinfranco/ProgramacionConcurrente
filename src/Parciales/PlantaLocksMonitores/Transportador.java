@@ -1,4 +1,4 @@
-package Recuperatorio.PlantaSemaforos;
+package Parciales.PlantaLocksMonitores;
 
 import java.util.Random;
 
@@ -6,21 +6,19 @@ import java.util.Random;
  *
  * @author Fran
  */
-public class Empaquetador extends Thread {
+public class Transportador extends Thread {
 
     private Planta planta;
     Random random = new Random();
 
-    public Empaquetador(Planta planta) {
+    public Transportador(Planta planta) {
         this.planta = planta;
     }
 
     public void run() {
         while (true) {
             try {
-                planta.retirarCaja();
-                Thread.sleep(random.nextInt(1000, 2000));
-                planta.reponerCaja();
+                planta.transportar();
             } catch (Exception ex) {
 
             }

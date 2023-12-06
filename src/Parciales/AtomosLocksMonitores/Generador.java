@@ -1,4 +1,4 @@
-package Recuperatorio.AtomosLocksMonitores;
+package Parciales.AtomosLocksMonitores;
 
 /**
  *

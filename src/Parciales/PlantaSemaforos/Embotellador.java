@@ -1,4 +1,4 @@
-package Recuperatorio.PlantaSemaforos;
+package Parciales.PlantaSemaforos;
 
 import java.util.Random;
 

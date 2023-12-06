@@ -1,11 +1,14 @@
 package Parciales.Compania;
 
+import java.util.Random;
+
 /**
  *
- * @author Fran
+ * @author franco.llanquin
  */
 public class Traductor extends Thread {
     
+    Random r = new Random();
     private Compania compania;
     
     public Traductor(String nombre, Compania compania) {
@@ -16,10 +19,11 @@ public class Traductor extends Thread {
     public void run() {
         while(true) {
             try {
-                Thread.sleep(1500);
+                Thread.sleep(6000); // simula tiempo de traduccion
                 compania.traducirCapitulo();
             } catch (InterruptedException ex) {
             }
         }
     }
+    
 }

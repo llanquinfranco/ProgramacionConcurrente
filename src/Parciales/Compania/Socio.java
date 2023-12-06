@@ -1,11 +1,14 @@
 package Parciales.Compania;
 
+import java.util.Random;
+
 /**
  *
- * @author Fran
+ * @author franco.llanquin
  */
 public class Socio extends Thread {
 
+    Random r = new Random();
     private char tipo;
     private Compania compania;
 
@@ -16,19 +19,25 @@ public class Socio extends Thread {
     }
 
     public void run() {
-        while (true) {
-            try {
-                if (tipo == 'E') {
-                    int numero = compania.verEspanol();
-                    Thread.sleep(1500);
+        int numero;
+        try {
+            if (tipo == 'E') {
+                while (true) {
+                    numero = compania.seleccionarEspanol();
+                    Thread.sleep(4000); // simula el tiempo que mira el capitulo
                     compania.terminarEspanol(numero);
-                } else if (tipo == 'I') {
-                    int numero = compania.verIngles();
-                    Thread.sleep(1500);
-                    compania.terminarIngles(numero);
+                    Thread.sleep(3000); // cuando, termina de ver un capitulo, descansan un tiempo asi no esta viendo sin parar
                 }
-            } catch (InterruptedException ex) {
+            } else if (tipo == 'I') {
+                while (true) {
+                    numero = compania.seleccionarIngles();
+                    Thread.sleep(4000); // simula el tiempo que mira el capitulo
+                    compania.terminarIngles(numero);
+                    Thread.sleep(3000); // cuando, termina de ver un capitulo, descansan un tiempo asi no esta viendo sin parar
+                }
             }
+        } catch (InterruptedException ex) {
         }
     }
+
 }

@@ -1,4 +1,4 @@
-package Recuperatorio.PlantaSemaforos;
+package Parciales.PlantaSemaforos;
 
 /**
  *
